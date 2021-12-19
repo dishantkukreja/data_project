@@ -3,10 +3,12 @@ import pytest
 from functions_data.data import read_csv,days_table_cover,departure_cities,relation_manufacter
 # import data
 
+
 def test_read_csv():
-    path='C:/Users//Rev07//PycharmProjects//data2//test//file//flight.csv'
-    df = read_csv(path)
-    assert df.shape == (3,1)
+     path='C:/Users//Rev07//PycharmProjects//data2//test//file//flight.csv'
+     df = read_csv(path)
+     expected = (3,1)
+     assert df.shape == expected
 
 def test_days_table_cover():
     #Arrange
