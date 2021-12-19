@@ -1,5 +1,7 @@
 import pandas as pd
 from math import radians, cos, sin, asin, sqrt
+import logging
+import os
 
 
 def read_csv(path: str):
@@ -33,22 +35,30 @@ def haversine(lon1, lat1, lon2, lat2):
 
 
 def main():
-    flight = read_csv('C:/Users//Rev07//Downloads//data//flights.csv')
-    planes = read_csv('C:/Users//Rev07//Downloads//data//planes.csv')
-    airport = read_csv('C:/Users//Rev07//Downloads//data//airports.csv')
+    current_file = os.path.abspath(os.path.dirname(__file__))
+    csv_filename = 'C:/Users/Rev07/Downloads/data/'
+    absolute_path = os.path.join(current_file, csv_filename)
+    flight_csv = 'flights.csv'
+    planes_csv = 'planes.csv'
+    airports_csv = 'airports.csv'
+
+    flight = read_csv(f"{absolute_path}{flight_csv}")
+    planes = read_csv(f"{absolute_path}{planes_csv}")
+    airport = read_csv(f"{absolute_path}{airports_csv}")
     b = airport.copy()
+    logger = logging.getLogger(__name__)
 
     print(days_table_cover(flight))
 
-    print("5291016 days in the flights table covers")
+    logger.info("5291016 days in the flights table covers")
 
     print(departure_cities(flight))
 
-    print("EWR, JFK,LGA are departure cities in the flight database covers")
+    logger.info("EWR, JFK,LGA are departure cities in the flight database covers")
 
     print(relation_manufacter(flight, planes).head(1))
 
-    print("BOEING is the airplane manufacturer incurred the most delays in the analysis period")
+    logger.info("BOEING is the airplane manufacturer incurred the most delays in the analysis period")
 
     b['tmp'] = 1
     b = pd.merge(b, b, on='tmp')
