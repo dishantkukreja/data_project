@@ -1,7 +1,7 @@
 import pandas as pd
 import pytest
 from functions_data.data import read_csv,days_table_cover,departure_cities,relation_manufacter
-
+# import data
 
 def test_read_csv():
     path='C:/Users//Rev07//PycharmProjects//data2//test//file//flight.csv'
@@ -43,7 +43,7 @@ def test_relation_manufacter():
     assert result[0] == expected
 
 
-
-print(test_relation_manufacter())
+#
+# print(test_relation_manufacter())
 
 

@@ -48,7 +48,7 @@ def main():
 
     print(relation_manufacter(flight, planes).head(1))
 
-    print("BOEING-airplane manufacturer incurred the most delays in the analysis period")
+    print("BOEING is the airplane manufacturer incurred the most delays in the analysis period")
 
     b['tmp'] = 1
     b = pd.merge(b, b, on='tmp')
@@ -58,7 +58,7 @@ def main():
                                               row['LONGITUDE_y'],
                                               row['LATITUDE_y']), axis=1)
     b = b[b.dist < 500] #distance between 500 km
-    df1 = b.groupby('CITY_x')['CITY_y'].apply(list)
+    # df1 = b.groupby('CITY_x')['CITY_y'].apply(list)
     df2 = b.groupby('CITY_x')['CITY_y'].size()
     connected = (df2.sort_values(ascending=False))
     print(connected.head(2))
