@@ -7,8 +7,8 @@ import os
 def read_csv(path: str):
     return pd.read_csv(path)
 
-def days_table_cover(flight):
-    return flight.groupby(['year'], sort=True).sum()
+def days_table_cover(df):
+    return df.groupby(['year'], sort=True).sum()
 
 def departure_cities(flight):
     count = flight[["origin"]]
@@ -19,6 +19,11 @@ def relation_manufacter(flight,planes):
     relation = flight.merge(planes, how='inner', on=['tailnum', 'year'])
     most_delay = relation.groupby(['manufacturer'], sort=True).sum().sort_values("dep_delay", ascending=False)
     return most_delay['dep_delay']
+
+def db_path():
+    current_file = os.path.abspath(os.path.dirname(__file__))
+    csv_filename = 'C:/Users/Rev07/Downloads/data/'
+    return os.path.join(current_file, csv_filename)
 
 def haversine(lon1, lat1, lon2, lat2):
 
@@ -35,30 +40,31 @@ def haversine(lon1, lat1, lon2, lat2):
 
 
 def main():
-    current_file = os.path.abspath(os.path.dirname(__file__))
-    csv_filename = 'C:/Users/Rev07/Downloads/data/'
-    absolute_path = os.path.join(current_file, csv_filename)
+    # current_file = os.path.abspath(os.path.dirname(__file__))
+    # csv_filename = 'C:/Users/Rev07/Downloads/data/'
+    # absolute_path = os.path.join(current_file, csv_filename)
     flight_csv = 'flights.csv'
     planes_csv = 'planes.csv'
     airports_csv = 'airports.csv'
+    df_path = db_path()
 
-    flight = read_csv(f"{absolute_path}{flight_csv}")
-    planes = read_csv(f"{absolute_path}{planes_csv}")
-    airport = read_csv(f"{absolute_path}{airports_csv}")
+    flight = read_csv(f"{df_path}{flight_csv}")
+    planes = read_csv(f"{df_path}{planes_csv}")
+    airport = read_csv(f"{df_path}{airports_csv}")
     b = airport.copy()
     logger = logging.getLogger(__name__)
 
     print(days_table_cover(flight))
 
-    logger.info("5291016 days in the flights table covers")
+    print("5291016 days in the flights table covers")
 
     print(departure_cities(flight))
 
-    logger.info("EWR, JFK,LGA are departure cities in the flight database covers")
+    print("EWR, JFK,LGA are departure cities in the flight database covers")
 
     print(relation_manufacter(flight, planes).head(1))
 
-    logger.info("BOEING is the airplane manufacturer incurred the most delays in the analysis period")
+    print("BOEING is the airplane manufacturer incurred the most delays in the analysis period")
 
     b['tmp'] = 1
     b = pd.merge(b, b, on='tmp')
