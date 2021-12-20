@@ -1,9 +1,9 @@
 import pandas as pd
 import pytest
-from functions_data.data import read_csv,days_table_cover,departure_cities,relation_manufacter
+from functions_data.data import read_csv,days_table_cover,departure_cities,relation_manufacter,db_path
 # import data
 
-@pytest.fixture
+@pytest.fixture(scope='module')
 def df():
     path = 'C:/Users//Rev07//PycharmProjects//data2//test//file//flight.csv'
     df = pd.read_csv(path, sep='\t')
@@ -43,4 +43,6 @@ def test_relation_manufacter(df):
 
 
 
-
+def test_db_path():
+    expected = 'C:/Users/Rev07/Downloads/data/'
+    assert db_path() == expected
