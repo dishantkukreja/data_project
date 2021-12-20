@@ -52,7 +52,7 @@ def main():
     planes = read_csv(f"{df_path}{planes_csv}")
     airport = read_csv(f"{df_path}{airports_csv}")
     b = airport.copy()
-    logger = logging.getLogger(__name__)
+    # logger = logging.getLogger(__name__)
 
     print(days_table_cover(flight))
 

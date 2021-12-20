@@ -5,13 +5,13 @@ from functions_data.data import read_csv,days_table_cover,departure_cities,relat
 
 @pytest.fixture(scope='module')
 def df():
-    path = 'C:/Users//Rev07//PycharmProjects//data2//test//file//flight.csv'
+    path = 'C:/Users//Rev07/PycharmProjects/data2/test/file/flight.csv'
     df = pd.read_csv(path, sep='\t')
     return df
 
 
 def test_read_csv():
-     path='C:/Users//Rev07//PycharmProjects//data2//test//file//flight.csv'
+     path='C:/Users/Rev07/PycharmProjects/data2/test/file/flight.csv'
      df = read_csv(path)
      expected = (3,1)
      assert df.shape == expected
@@ -33,7 +33,7 @@ def test_departure_cities(df):
 
 
 def test_relation_manufacter(df):
-    path2 = 'C:/Users//Rev07//PycharmProjects//data2//test//file//planes.csv'
+    path2 = 'C:/Users/Rev07/PycharmProjects/data2/test/file/planes.csv'
     df2 = pd.read_csv(path2, sep='\t')
     expected = 105.0
     # Act
